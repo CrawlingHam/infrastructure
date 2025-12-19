@@ -1,4 +1,6 @@
 *.env*
 node_modules
 src/globals.tf
-*terraform*
+*terraform
+*.tf*
+*.terraform.lock*
