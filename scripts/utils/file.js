@@ -24,8 +24,8 @@ function getEnvVar(key, env = {}) {
     return env[key];
 }
 
-function createOrModifyFile(filePath, content) {
+function createFile(filePath, content) {
     fs.writeFileSync(filePath, content, "utf8");
 }
 
-module.exports = { loadEnv, getEnvVar, createOrModifyFile };
+module.exports = { loadEnv, getEnvVar, createFile };

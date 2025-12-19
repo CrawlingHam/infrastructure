@@ -1,4 +1,4 @@
-const { file, terraform } = require("../utils");
+const { file, terraform, string } = require("../utils");
 const path = require("path");
 
 function TFConfig(env, root) {
@@ -17,9 +17,21 @@ function TFConfig(env, root) {
                 type: "string",
             },
             {
+                description: "The billing account ID to use for the project",
+                value: env["GCP_BILLING_ACCOUNT_ID"],
+                name: "gcp_billing_account_id",
+                type: "string",
+            },
+            {
                 description: "The name of the project",
                 value: env["PROJECT_NAME"],
                 name: "project_name",
+                type: "string",
+            },
+            {
+                description: "The capitalized name of the project",
+                value: string.capitalize(env["PROJECT_NAME"]),
+                name: "capitalized_project_name",
                 type: "string",
             },
         ],
@@ -42,7 +54,7 @@ function TFConfig(env, root) {
         ],
     };
 
-    file.createOrModifyFile(
+    file.createFile(
         path.join(root, "src", "globals.tf"),
         terraform.createTFVariables(tf_globals.variables) + "\n" + terraform.createTFLocals(tf_globals.locals)
     );
