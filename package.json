@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "infra": "cd infrastructure && tofu init && tofu apply",
+        "scripts": "node scripts/index.js"
+    },
+    "devDependencies": {
+        "dotenv": "^16.4.5"
+    }
+}
