@@ -49,6 +49,11 @@ function TFConfig(env, root) {
                         name: "Project",
                         type: "string",
                     },
+                    {
+                        value: env["MAINTAINER"],
+                        name: "Maintainer",
+                        type: "string",
+                    },
                 ],
             },
         ],

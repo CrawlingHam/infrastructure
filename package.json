@@ -1,6 +1,8 @@
 {
     "scripts": {
-        "infra": "cd src && tofu init && tofu apply",
+        "infra:apply": "cd src && tofu apply",
+        "infra:plan": "cd src && tofu plan",
+        "infra:init": "cd src && tofu init",
         "scripts": "node scripts/index.js"
     },
     "devDependencies": {

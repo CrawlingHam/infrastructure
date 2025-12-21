@@ -1,4 +1,5 @@
 module "iam" {
+    tags = var.tags
     source = "./iam"
 }
 
