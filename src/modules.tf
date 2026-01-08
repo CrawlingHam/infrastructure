@@ -1,4 +1,6 @@
 module "aws" {
+    aws_ses_sender_identity = local.aws_ses_sender_identity
+    vercel_team_slug = local.vercel_team_slug
     project_name = local.project_name
     tags = local.common_tags
     source = "./aws"
