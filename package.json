@@ -2,8 +2,7 @@
     "scripts": {
         "infra:apply": "cd src && tofu apply",
         "infra:plan": "cd src && tofu plan",
-        "infra:init": "cd src && tofu init",
-        "scripts": "node scripts/index.js"
+        "infra:init": "cd src && tofu init"
     },
     "devDependencies": {
         "dotenv": "^16.4.5"

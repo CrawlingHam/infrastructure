@@ -17,8 +17,8 @@ terraform {
     }
 
     backend "s3" {
-        bucket = "${var.project_name}-terraform-state"
-        key    = "terraform.tfstate"
-        region = var.aws_region
+        bucket = local.terraform_state_bucket
+        key    = local.terraform_state_key
+        region = local.aws_region
     }
 }

@@ -1,13 +1,13 @@
 module "aws" {
-    project_name = var.project_name
+    project_name = local.project_name
     tags = local.common_tags
     source = "./aws"
 }
 
 module "gcp" {
-    capitalized_project_name = var.capitalized_project_name
-    billing_account_id = var.gcp_billing_account_id
-    project_name = var.project_name
+    capitalized_project_name = local.capitalized_project_name
+    billing_account_id = local.gcp_billing_account_id
+    project_name = local.project_name
     labels = local.common_tags
     source = "./gcp"
 
