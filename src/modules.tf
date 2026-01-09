@@ -7,9 +7,12 @@ module "aws" {
 }
 
 module "gcp" {
+    google_oauth_client_secret = local.google_oauth_client_secret
     capitalized_project_name = local.capitalized_project_name
+    google_oauth_client_id = local.google_oauth_client_id
     billing_account_id = local.gcp_billing_account_id
     project_name = local.project_name
+    domain_name = local.domain_name
     labels = local.common_tags
     source = "./gcp"
 
