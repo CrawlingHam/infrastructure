@@ -6,6 +6,7 @@ module "firebase-project" {
 
     services = [
         "identitytoolkit.googleapis.com",      # Identity Toolkit API
+        "firebasestorage.googleapis.com",      # Firebase Storage API
         "firebase.googleapis.com",             # Firebase API
     ]
 
