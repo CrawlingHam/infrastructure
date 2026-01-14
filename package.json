@@ -1,8 +1,8 @@
 {
     "scripts": {
-        "infra:apply": "cd src && tofu apply",
-        "infra:plan": "cd src && tofu plan",
-        "infra:init": "cd src && tofu init"
+        "infra:apply": "cd src/terraform && tofu apply",
+        "infra:plan": "cd src/terraform && tofu plan",
+        "infra:init": "cd src/terraform && tofu init"
     },
     "devDependencies": {
         "dotenv": "^16.4.5"

@@ -13,6 +13,7 @@ module "gcp" {
     billing_account_id = local.gcp_billing_account_id
     project_name = local.project_name
     domain_name = local.domain_name
+    gcp_region = local.gcp_region
     labels = local.common_tags
     source = "./gcp"
 

@@ -25,3 +25,7 @@ variable "google_oauth_client_id" {
 variable "google_oauth_client_secret" {
     type = string
 }
+
+variable "gcp_region" {
+    type = string
+}

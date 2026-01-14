@@ -1,5 +1,5 @@
 locals {
-    env_file_path = "${path.module}/../.env"
+    env_file_path = "${path.module}/../../.env"
     env_file_exists = try(fileexists(local.env_file_path), false)
     
     env_file_lines = local.env_file_exists ? [

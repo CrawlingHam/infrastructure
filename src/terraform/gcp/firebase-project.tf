@@ -7,6 +7,8 @@ module "firebase-project" {
     services = [
         "identitytoolkit.googleapis.com",      # Identity Toolkit API
         "firebasestorage.googleapis.com",      # Firebase Storage API
+        "firebaserules.googleapis.com",        # Firebase Rules API
+        "firestore.googleapis.com",            # Firestore API
         "firebase.googleapis.com",             # Firebase API
     ]
 
@@ -134,8 +136,49 @@ resource "google_identity_platform_default_supported_idp_config" "firebase-idp-c
     enabled       = true
     
     depends_on = [
+        google_identity_platform_config.firebase-auth-config,
         google_firebase_project.project,
         module.firebase-project,
-        google_identity_platform_config.firebase-auth-config
+    ]
+}
+
+resource "google_firestore_database" "firestore" {
+    name             = "${replace(module.firebase-project.project_id, "-713ae908", "")}-firestore"
+    project          = module.firebase-project.project_id
+    type             = "FIRESTORE_NATIVE"
+    location_id      = var.gcp_region
+    concurrency_mode = "OPTIMISTIC"
+
+    depends_on       = [
+        google_firebase_project.project,
+        module.firebase-project,
+    ]
+}
+
+resource "google_firebaserules_ruleset" "firestore-rules" {
+    project  = google_firestore_database.firestore.project
+    provider = google-beta
+
+    source {
+        files {
+            content = file("${path.module}/rules/firebase-project-firestore.rules")
+            name    = "firebase-project-firestore.rules"
+        }
+    }
+
+    depends_on = [
+        google_firestore_database.firestore,
+    ]
+}
+
+resource "google_firebaserules_release" "firestore" {
+    ruleset_name = google_firebaserules_ruleset.firestore-rules.name
+    project      = google_firestore_database.firestore.project
+    name         = "cloud.firestore"
+    provider     = google-beta
+
+    depends_on = [
+        google_firebaserules_ruleset.firestore-rules,
+        google_firestore_database.firestore,
     ]
 }
