@@ -143,11 +143,11 @@ resource "google_identity_platform_default_supported_idp_config" "firebase-idp-c
 }
 
 resource "google_firestore_database" "firestore" {
-    name             = "${replace(module.firebase-project.project_id, "-713ae908", "")}-firestore"
     project          = module.firebase-project.project_id
     type             = "FIRESTORE_NATIVE"
     location_id      = var.gcp_region
     concurrency_mode = "OPTIMISTIC"
+    name             = "(default)"
 
     depends_on       = [
         google_firebase_project.project,
