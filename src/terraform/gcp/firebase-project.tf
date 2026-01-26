@@ -8,12 +8,15 @@ module "firebase-project" {
         "identitytoolkit.googleapis.com",      # Identity Toolkit API
         "firebasestorage.googleapis.com",      # Firebase Storage API
         "firebaserules.googleapis.com",        # Firebase Rules API
+         "youtube.googleapis.com",              # YouTube Data API
         "firestore.googleapis.com",            # Firestore API
         "firebase.googleapis.com",             # Firebase API
+        "apikeys.googleapis.com",             # API Keys API
     ]
 
     labels = merge(local.gcp_labels, {
         "firebase" = "enabled"
+        "youtube"  = "enabled"
     })
 
     providers = {
@@ -181,4 +184,22 @@ resource "google_firebaserules_release" "firestore" {
         google_firebaserules_ruleset.firestore-rules,
         google_firestore_database.firestore,
     ]
+}
+
+module "youtube-api-key" {
+    display_name = "YouTube Data API Key (Browser)"
+    project_id = module.firebase-project.project_id
+    name = "youtube-data-api-key-browser"
+    service = "youtube.googleapis.com"
+    allowed_referrers = []
+    source = "./api-keys"
+
+    providers = {
+        google-beta.no_user_project_override = google-beta.no_user_project_override
+        google-beta                          = google-beta
+    }
+
+    depends_on = [ 
+        module.firebase-project
+     ]
 }
