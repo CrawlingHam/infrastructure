@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "infra:apply": "cd src/terraform && tofu apply",
+        "infra:apply": "cd src/terraform && tofu init && tofu apply",
         "infra:plan": "cd src/terraform && tofu plan",
         "infra:init": "cd src/terraform && tofu init"
     },
