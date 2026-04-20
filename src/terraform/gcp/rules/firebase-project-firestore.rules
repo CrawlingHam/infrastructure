@@ -2,7 +2,7 @@ rules_version = '2';
 service cloud.firestore {
 	match /databases/{database}/documents {
 
-		match /users/{uid} {
+		match /flixburst/{uid} {
 			allow read: if request.auth != null && request.auth.uid == uid;
 
 			allow update: if request.auth != null
@@ -10,6 +10,19 @@ service cloud.firestore {
 				&& request.resource.data.diff(resource.data)
 			.changedKeys()
 			.hasOnly(["linkedProviders", "updatedAt", "playlists", "preferences", "tracks"]);
+
+			allow create, delete: if request.auth != null
+				&& request.auth.uid == uid;
+		}
+
+		match /trade-tracker/{uid} {
+			allow read: if request.auth != null && request.auth.uid == uid;
+
+			allow update: if request.auth != null
+				&& request.auth.uid == uid
+				&& request.resource.data.diff(resource.data)
+			.changedKeys()
+			.hasOnly(["updatedAt", "currency", "symbol"]);
 
 			allow create, delete: if request.auth != null
 				&& request.auth.uid == uid;
