@@ -22,7 +22,7 @@ service cloud.firestore {
 				&& request.auth.uid == uid
 				&& request.resource.data.diff(resource.data)
 			.changedKeys()
-			.hasOnly(["updatedAt", "currency", "symbol"]);
+			.hasOnly(["updatedAt", "currency", "symbol", "goals"]);
 
 			allow create, delete: if request.auth != null
 				&& request.auth.uid == uid;
